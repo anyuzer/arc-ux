@@ -1,0 +1,35 @@
+{
+  "name": "arc-ux",
+  "version": "0.0.1",
+  "description": "A purely functional router for independently evaluating a path against a list of routes",
+  "main": "src/ArcUX.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anyuzer/arc-ux.git"
+  },
+  "keywords": [
+    "react",
+    "ux",
+    "arc"
+  ],
+  "author": "Ian Reid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anyuzer/arc-ux/issues"
+  },
+  "homepage": "https://github.com/anyuzer/arc-ux#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  },
+  "dependencies": {
+    "arc-lib": "^9.2.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "styled-components": "^6.3.10"
+  }
+}
