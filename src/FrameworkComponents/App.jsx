@@ -24,7 +24,7 @@ class App extends React.Component {
     async componentDidMount() {
         const initialRoute = this.props.ArcUX.getKeyVal('route');
 
-        Log.dGreen(`Our initial route is ${initialRoute}`);
+        this.props.ArcUX.emit('log', {message: `Our initial route is ${initialRoute}`})
         const match = this.props.ArcUX.renderRoute(initialRoute);
         if(match){
             this.setState({
@@ -50,6 +50,12 @@ class App extends React.Component {
         }
 
         const RoutedComponent = this.state.target;
+
+        if(!RoutedComponent){
+            this.props.ArcUX.emit('log', {message: "Could not render anything. No AppLoader. No route matched. No NotFound handler. Returning null."})
+            return null;
+        }
+
         const Modal = this.state.modal ? this.state.modal.modal : null;
         if(Shell){
             return (
@@ -69,10 +75,10 @@ class App extends React.Component {
     }
 
     loadRoute(_newRoute) {
-        Log.dRed('New route called?', [_newRoute])
+        this.props.ArcUX.emit('log', [{message: `New route called:`, data: [_newRoute]}])
         const match = this.props.ArcUX.renderRoute(_newRoute);
         if(!match){
-            Log.dRed('Not Found handler missing');
+            this.props.ArcUX.emit('log', [{message: 'Not Found handler missing'}]);
             return;
         }
         const fullHistoryString = decodeURI(_newRoute);

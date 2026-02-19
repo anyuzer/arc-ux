@@ -1,4 +1,4 @@
-import {ArcRouter, ArcEvents, Log, is} from "arc-lib";
+import {ArcRouter, ArcEvents, is} from "arc-lib";
 import {createRoot} from "react-dom/client";
 import React from "react";
 import Html from "./Html.js";
@@ -50,7 +50,6 @@ class ArcUX {
     setKeyVal(_key, _value, _suppressEmit=false) {
         this.#keyVal[_key] = _value;
         if(!_suppressEmit) {
-            Log.dRed(`Emitting: ${_key}`, [_value]);
             this.emit(_key, [_value]);
         }
     }
@@ -155,7 +154,6 @@ class ArcUX {
             _ctx.response.status = 200;
             _ctx.response.body = this.#Html.getString();
         } catch (e) {
-            Log.catch(e);
             _ctx.response.status = 500;
             _ctx.response.body = {message: e.message};
         }
