@@ -25,15 +25,16 @@
   "homepage": "https://github.com/anyuzer/arc-ux#readme",
   "devDependencies": {
     "jest": "^30.2.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.3.10"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": ">=18 <20",
+    "react-dom": ">=18 <20",
+    "styled-components": ">=6 <7"
   },
   "dependencies": {
-    "arc-lib": "^9.2.0",
-    "styled-components": "^6.3.10"
+    "arc-lib": "^9.2.0"
   }
 }
