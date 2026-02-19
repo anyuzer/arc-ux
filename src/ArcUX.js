@@ -5,6 +5,7 @@ import Html from "./Html.js";
 import {ThemeProvider} from "styled-components";
 import App from "./FrameworkComponents/App.jsx";
 import Form from "./Form.js";
+import withArcUX from "./withArcUX.js";
 
 class ArcUX {
     #routeMap = {};
@@ -163,3 +164,7 @@ class ArcUX {
 }
 
 export default new ArcUX;
+
+export {
+    withArcUX
+};
