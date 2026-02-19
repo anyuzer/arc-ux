@@ -20,7 +20,7 @@ class ArcUX {
     #currentTheme;
     #apis = {};
     #environment = 'production';
-    #rootPath = '/cloud';
+    #rootPath = '';
     #keyVal = {};
 
     #forms = {};
@@ -99,20 +99,15 @@ class ArcUX {
     }
 
     bindRoute(_route, _Component, _Shell=null) {
-        this.#routeMap[_route] = { Component: _Component, Shell: _Shell };
+        this.#routeMap[`${this.#rootPath}${_route}`] = { Component: _Component, Shell: _Shell };
         this.#RouteRenderer.setMap(this.#routeMap);
-        Log.dPink(`Bind Route?`, this.#routeMap);
     }
 
     renderRoute(_route) {
         const routeData = this.#RouteRenderer.travel(_route)
-        Log.dRed('RouteData?', routeData);
-        Log.dYellow('Router?', this.#RouteRenderer);
         if (routeData.match) {
             return routeData.match;
         }
-
-        Log.dGreen('NotFound?', this.#handlers);
 
         if(this.getHandler('NotFound')){
             return this.getHandler('NotFound');
@@ -139,8 +134,12 @@ class ArcUX {
         this.#Html.addHeadElement(_headElement)
     }
 
+    htmlAddWindowVar(key, val){
+        this.#Html.addWindowVariable(key, val);
+    }
+
     loadPage(_route, _suppressEmit=false) {
-        this.setKeyVal('route', _route, _suppressEmit);
+        this.setKeyVal('route', `${this.#rootPath}${_route}`, _suppressEmit);
     }
 
     renderModal(_Modal, _props) {
