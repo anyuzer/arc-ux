@@ -152,7 +152,7 @@ class ArcUX {
     async serveHtml(_ctx, _next, _routeData) {
         try{
             _ctx.response.status = 200;
-            _ctx.response.body = this.#Html.getString();
+            _ctx.response.body = this.#Html.getString(_ctx.user);
         } catch (e) {
             _ctx.response.status = 500;
             _ctx.response.body = {message: e.message};

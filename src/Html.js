@@ -20,7 +20,7 @@ class Html {
         this.#windowVariables[_key] = _val;
     }
 
-    getString() {
+    getString(_user) {
         return (
 `<!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,8 @@ class Html {
         <script>
             window.app = ${JSON.stringify({
                 environment: this.#environment,
-                ...this.#windowVariables
+                ...this.#windowVariables,
+                user: _user || false
             })};
         </script>
     </head>
