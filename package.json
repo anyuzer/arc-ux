@@ -1,6 +1,6 @@
 {
   "name": "arc-ux",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A purely functional router for independently evaluating a path against a list of routes",
   "main": "src/ArcUX.js",
   "type": "module",
