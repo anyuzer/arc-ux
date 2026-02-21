@@ -104,6 +104,7 @@ class ArcUX {
 
     renderRoute(_route) {
         const routeData = this.#RouteRenderer.travel(_route)
+        this.setKeyVal('routeData', routeData);
         if (routeData.match) {
             return routeData.match;
         }
