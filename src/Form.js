@@ -29,6 +29,7 @@ class Form {
         this.#form[_name] = _value;
         this.#validChecks[_name] = _isValid;
         this.emit('change', [this]);
+        this.emit(_name, [_value, _isValid, this]);
     }
 
     modifyField(_name, _value) {
