@@ -46,6 +46,10 @@ class ArcUX {
         return this.#forms[_form];
     }
 
+    deleteForm(_form) {
+        delete this.#forms[_form];
+    }
+
     //Simplest shared data state ever
     setKeyVal(_key, _value, _suppressEmit=false) {
         this.#keyVal[_key] = _value;
