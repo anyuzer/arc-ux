@@ -146,6 +146,14 @@ class ArcUX {
         this.setKeyVal('route', `${this.#rootPath}${_route}`, _suppressEmit);
     }
 
+    pushURI(_newURI, _replace) {
+        const fullHistoryString = decodeURI(_newURI);
+        if (_replace) {
+            return window.history.replaceState({ code: fullHistoryString }, "", fullHistoryString);
+        }
+        return window.history.pushState({ code: fullHistoryString }, "", fullHistoryString);
+    }
+
     renderModal(_Modal, _props) {
         this.emit('modal', [_Modal, _props || {}]);
     }

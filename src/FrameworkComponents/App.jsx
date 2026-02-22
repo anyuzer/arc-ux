@@ -24,6 +24,12 @@ class App extends React.Component {
     async componentDidMount() {
         const initialRoute = this.props.ArcUX.getKeyVal('route');
 
+        window.onpopstate = (_event) => {
+            if (_event.state) {
+                this.props.ArcUX.loadPage(_event.state.code);
+            }
+        };
+
         this.props.ArcUX.emit('log', {message: `Our initial route is ${initialRoute}`})
         const match = this.props.ArcUX.renderRoute(initialRoute);
         if(match){
