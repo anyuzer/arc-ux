@@ -1,4 +1,4 @@
-import {ArcRouter, ArcEvents, is} from "arc-lib";
+import {ArcRouter, ArcEvents, is, Log} from "arc-lib";
 import {createRoot} from "react-dom/client";
 import React from "react";
 import Html from "./Html.js";
@@ -148,6 +148,14 @@ class ArcUX {
 
     pushURI(_newURI, _replace) {
         const fullHistoryString = decodeURI(_newURI);
+
+        const routeData = this.#RouteRenderer.travel(fullHistoryString)
+        Log.info('Push uri', [fullHistoryString, routeData]);
+        if(routeData.match){
+            this.setKeyVal('route', fullHistoryString, true);
+            this.setKeyVal('routeData', routeData, true);
+        }
+
         if (_replace) {
             return window.history.replaceState({ code: fullHistoryString }, "", fullHistoryString);
         }
