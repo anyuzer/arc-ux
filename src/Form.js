@@ -25,15 +25,18 @@ class Form {
         return this.#form[_name];
     }
 
-    updateField(_name, _value, _isValid) {
+    updateField(_name, _value, _isValid, _suppress) {
         this.#form[_name] = _value;
         this.#validChecks[_name] = _isValid;
+        if(_suppress){
+            return;
+        }
         this.emit('change', [this]);
         this.emit(_name, [_value, _isValid, this]);
     }
 
-    modifyField(_name, _value) {
-        this.#modifiers[_name](_value);
+    modifyField(_name, _value, _suppress) {
+        this.#modifiers[_name](_value, _suppress);
     }
 
     getData(){
