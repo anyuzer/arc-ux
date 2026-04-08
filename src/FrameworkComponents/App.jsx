@@ -2,6 +2,7 @@ import React from 'react';
 import withArcUX from "../withArcUX.js";
 import ModalLayer from "./ModalLayer.jsx";
 import { Log } from "arc-lib";
+import fetch from "cross-fetch";
 
 class App extends React.Component {
     #routeListener;
@@ -22,6 +23,46 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
+        if(window.app.environment === 'development'){
+            window.app.ArcUX = this.props.ArcUX;
+        }
+
+        if(window?.app?.version) {
+            let timeout = 1000*60*5;
+            if(window.app.environment === 'development'){
+                timeout = 1000*30; //Thirty seconds
+            }
+            setInterval(async () => {
+                let failures = 0;
+                try{
+                    let response;
+                    const rawResponse = await fetch(`/version`, {
+                        method: "GET",
+                        mode: "cors",
+                        headers: {},
+                        credentials: 'include'
+                    });
+
+                    status = rawResponse.status;
+                    response = await rawResponse.text();
+
+                    try{
+                        response = JSON.parse(response);
+                    } catch (e) {
+                        Log.catch(e);
+                    }
+
+                    if(response.version !== window.app.version){
+                        Log.dRed("There is a version mismatch.");
+                        this.props.ArcUX.emit('version', [window.app.version, response.version]);
+                    }
+                } catch (e){
+                    failures++;
+                }
+
+            }, timeout);
+        }
+
         const initialRoute = this.props.ArcUX.getKeyVal('route');
 
         window.onpopstate = (_event) => {

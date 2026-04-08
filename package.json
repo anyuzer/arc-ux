@@ -32,7 +32,8 @@
   "peerDependencies": {
     "react": ">=18 <20",
     "react-dom": ">=18 <20",
-    "styled-components": ">=6 <7"
+    "styled-components": ">=6 <7",
+    "cross-fetch": "^4.1.0"
   },
   "dependencies": {
     "arc-lib": "^9.2.0"
