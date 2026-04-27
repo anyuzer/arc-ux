@@ -52,8 +52,8 @@ class App extends React.Component {
                         Log.catch(e);
                     }
 
-                    if(response.version !== window.app.version){
-                        Log.dRed("There is a version mismatch.");
+                    if(rawResponse?.status === 200 && response.version !== window.app.version){
+                        Log.dRed("There is a version mismatch.", [window.app.version, response.version]);
                         this.props.ArcUX.emit('version', [window.app.version, response.version]);
                     }
                 } catch (e){

@@ -72,6 +72,11 @@ class ArcUX {
 
     addAPI(_name, _API) {
         this.#apis[_name] = _API;
+        if(is(_API.onUnauthorized) === 'function'){
+            _API.onUnauthorized((_route) => {
+                this.emit('unauthorized', [_name, _route])
+            })
+        }
     }
 
     API(_name){
